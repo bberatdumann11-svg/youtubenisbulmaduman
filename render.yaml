@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: youtube-nis-radar
+    env: docker
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
+    envVars:
+      - key: YOUTUBE_API_KEY
+        sync: false
+      - key: APP_PASSWORD
+        sync: false
+
