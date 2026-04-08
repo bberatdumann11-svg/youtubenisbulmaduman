@@ -34,6 +34,19 @@ def test_idea_value_score_has_verdict() -> None:
     assert result.verdict in {"yayına aday", "iyileştir", "ele"}
 
 
+def test_idea_value_rewards_shorter_time_and_lower_effort() -> None:
+    checklist = {
+        "Fikir heyecanlandırıyor mu?": True,
+        "Mümkün mü?": True,
+        "İzlenme kanıtı var mı?": True,
+        "Paketlenebilir mi?": True,
+        "Genel çekiciliği var mı?": True,
+    }
+    hard = score_idea_value(8, 7, 2, 2, checklist)
+    easy = score_idea_value(8, 7, 9, 9, checklist)
+    assert easy.total_score > hard.total_score
+
+
 def test_global_score_range() -> None:
     result = score_global_appeal(
         visual_without_language=8,
@@ -43,4 +56,3 @@ def test_global_score_range() -> None:
         production_complexity=5,
     )
     assert 0 <= result.score <= 100
-

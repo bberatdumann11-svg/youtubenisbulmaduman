@@ -8,3 +8,6 @@ def test_rejects_devanagari_title() -> None:
 def test_accepts_english_title() -> None:
     assert looks_like_english_title("The Dark Truth About Titanic")
 
+
+def test_rejects_romanized_non_english_marker() -> None:
+    assert not looks_like_english_title("Titanic ka sach")

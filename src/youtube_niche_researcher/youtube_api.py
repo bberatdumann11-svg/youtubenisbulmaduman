@@ -5,6 +5,7 @@ import time
 from collections.abc import Iterable
 from typing import TypeVar
 from urllib.error import HTTPError
+from urllib.error import URLError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
@@ -134,6 +135,8 @@ class YouTubeClient:
         except HTTPError as exc:
             body = exc.read().decode("utf-8", errors="replace")
             raise YouTubeApiError(f"YouTube API error {exc.code}: {body}") from exc
+        except URLError as exc:
+            raise YouTubeApiError(f"YouTube API bağlantı hatası: {exc.reason}") from exc
 
 
 def video_from_api_item(item: dict) -> VideoRecord | None:

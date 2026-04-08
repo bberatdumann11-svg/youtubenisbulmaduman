@@ -152,6 +152,8 @@ EVERGREEN_NEGATIVE = {
     "news",
 }
 
+VALUE_EQUATION_SCALE = 30
+
 
 def detect_opportunity_gaps(
     videos: list[VideoRecord],
@@ -219,18 +221,21 @@ def build_niche_path(
     specific_problem: str,
 ) -> NichePath:
     broad = clean_text(broad_category)
+    angle = clean_text(monetization_angle)
+    target_audience = clean_text(audience)
+    problem = clean_text(specific_problem)
     key = broad.lower()
-    if key in NICHE_TEMPLATES and not any([monetization_angle, audience, specific_problem]):
+    if key in NICHE_TEMPLATES and not any([angle, target_audience, problem]):
         levels = NICHE_TEMPLATES[key]
     else:
         levels = [
             broad or "Genel kategori",
-            clean_text(monetization_angle) or f"{broad} içinde uygulanabilir alt alan",
-            clean_text(audience) or "Belirli problemi olan hedef kişi",
-            clean_text(specific_problem) or "Tek ve net bir acıya çözüm veren içerik serisi",
+            angle or f"{broad or 'Bu alan'} içinde uygulanabilir alt alan",
+            target_audience or "Belirli problemi olan hedef kişi",
+            problem or "Tek ve net bir acıya çözüm veren içerik serisi",
         ]
     warning = None
-    if len([item for item in levels if item and "Genel" not in item]) < 4:
+    if not all([broad, levels[1], target_audience or key in NICHE_TEMPLATES, problem or key in NICHE_TEMPLATES]):
         warning = "Niş hâlâ geniş. En az 4. seviye tek bir insanın tek bir problemine inmeli."
     return NichePath(levels=levels, final_niche=levels[-1], warning=warning)
 
@@ -306,10 +311,12 @@ def score_idea_value(
 ) -> IdeaValueScore:
     dream = max(dream_result, 1)
     probability = max(success_probability, 1)
-    time = max(time_window, 1)
-    effort_value = max(effort, 1)
-    raw = (dream * probability) / (time * effort_value)
-    value_score = clamp(raw * 10, 0, 100)
+    time_benefit = clamp(time_window, 1, 10)
+    effort_benefit = clamp(effort, 1, 10)
+    time_cost = 11 - time_benefit
+    effort_cost = 11 - effort_benefit
+    raw = (dream * probability) / (time_cost * effort_cost)
+    value_score = clamp(raw * VALUE_EQUATION_SCALE, 0, 100)
     checklist_score = (sum(1 for passed in checklist.values() if passed) / max(len(checklist), 1)) * 100
     total = value_score * 0.65 + checklist_score * 0.35
     missing = [label for label, passed in checklist.items() if not passed]
@@ -366,4 +373,3 @@ def score_global_appeal(
     if production_complexity >= 8:
         warnings.append("Üretim karmaşıklığı yüksek; seri üretim maliyeti artabilir.")
     return GlobalAppealResult(score=round(score, 2), label=label, signals=signals, warnings=warnings)
-

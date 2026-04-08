@@ -207,9 +207,16 @@ Değer denklemi:
 Uygulama skoru:
 
 ```text
-value_score = clamp(raw_value * 10, 0, 100)
+value_score = clamp(raw_value * 30, 0, 100)
 checklist_score = geçen_madde_sayısı / 5 * 100
 total_score = value_score * 0.65 + checklist_score * 0.35
+```
+
+Arayüzde "sonuca ulaşma süresi ne kadar kısa?" ve "çaba ne kadar düşük?" alanlarında yüksek değer iyi kabul edilir. Kod bunu paydaya koymadan önce ters maliyete çevirir:
+
+```text
+time_cost = 11 - time_slider
+effort_cost = 11 - effort_slider
 ```
 
 5'te 5 kuralı:
@@ -427,4 +434,3 @@ Sürüm 3:
 - Yorumlardan persona acısı çıkarımı
 - Çoklu pazar karşılaştırması: US, UK, CA, AU
 - Haftalık otomatik niş radar raporu
-
