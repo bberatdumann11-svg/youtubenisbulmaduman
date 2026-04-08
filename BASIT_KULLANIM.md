@@ -24,6 +24,8 @@ Görsel panel için:
 
 Panel tarayıcıda açılır. Açılmazsa siyah pencerede çıkan `Local URL` adresini kopyalayıp tarayıcıya yapıştır.
 
+Panelin alt kısmında `Strateji Laboratuvarı` bölümü var. Arz-talep fırsatı, niş daraltma, persona, fikir çiftçiliği, değer denklemi, evergreen ve global hitap analizleri orada.
+
 ## Gerçek YouTube Araştırması
 
 Gerçek verilerle araştırma için:

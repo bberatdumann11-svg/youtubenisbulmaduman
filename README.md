@@ -26,6 +26,7 @@ BASIT_KULLANIM.md
 - Aynı formatı tekrar tekrar yapan kanalları yakalamaya çalışır.
 - Yapay zeka ile üretime uygun görünen nişleri öne çıkarır.
 - Latin alfabesi dışı başlıklı videoları varsayılan olarak eler.
+- Strateji Laboratuvarı ile arz-talep boşluğu, niş daraltma, persona, fikir çiftçiliği, değer denklemi, evergreen ve global hitap analizi yapar.
 - Sonunda rapor, tablo ve ham veri dosyası üretir.
 
 ## Çıktılar
@@ -42,6 +43,14 @@ reports\latest\
 report.md
 videos.csv
 research_result.json
+```
+
+## Strateji Yol Haritası
+
+Detaylı algoritma, veri modeli ve ekran planı:
+
+```text
+STRATEJIK_GELISTIRME_YOL_HARITASI.md
 ```
 
 ## Gerçek YouTube Verisi İçin

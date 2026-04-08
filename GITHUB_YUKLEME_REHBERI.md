@@ -181,3 +181,12 @@ Sonra sadece github_paketi içindekileri GitHub'a sürükle
 
 Bu kadar. Takıldığın yer olursa ekran görüntüsündeki hatayı aynen at, ona göre bir sonraki adımı söylerim.
 
+## 10. Strateji Dosyası da Pakete Dahil
+
+Yeni strateji planı şu dosyada:
+
+```text
+STRATEJIK_GELISTIRME_YOL_HARITASI.md
+```
+
+`07_github_paketi_hazirla.bat` çalıştırınca bu dosya da otomatik `github_paketi` içine girer.
